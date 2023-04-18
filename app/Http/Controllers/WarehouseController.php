@@ -19,7 +19,9 @@ class WarehouseController extends Controller
         if (Auth::user()->id !== $warehouse->user_id) {
             abort(403);
         }
-        return view('warehouse.show', ['warehouse' => $warehouse]);
+        $products = $warehouse->products()->paginate(5);
+//        dd($warehouse->products);
+        return view('warehouse.show', ['warehouse' => $warehouse, 'products' => $products]);
     }
 
     public function create()
