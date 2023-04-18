@@ -41,5 +41,38 @@ class WarehouseController extends Controller
         return redirect()->route('warehouses.index');
     }
 
+    public function destroy(Warehouse $warehouse)
+    {
+        if (Auth::user()->id !== $warehouse->user_id) {
+            abort(403);
+        }
+        $warehouse->delete();
+        return redirect()->route('warehouses.index')->with(['success' => 'Warehouse deleted successfully']);
+    }
+
+    public function edit(Warehouse $warehouse)
+    {
+        if (Auth::user()->id !== $warehouse->user_id) {
+            abort(403);
+        }
+        return view('warehouse.edit', ['warehouse' => $warehouse]);
+    }
+
+    public function update(Request $request, Warehouse $warehouse)
+    {
+        if (Auth::user()->id !== $warehouse->user_id) {
+            abort(403);
+        }
+
+       $wc = $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+        ]);
+
+        $warehouse->update($wc);
+        return redirect()->route('warehouses.index')->with(['success' => 'Warehouse updated successfully']);
+    }
+
 
 }

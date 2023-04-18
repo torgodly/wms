@@ -28,10 +28,18 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+//    index
     Route::get('warehouses', [WarehouseController::class, 'index'])->name('warehouses.index');
+//    show
     Route::get('warehouses/{warehouse}', [WarehouseController::class, 'show'])->name('warehouse.show');
+//    create
     Route::get('warehouse/create', [WarehouseController::class, 'create'])->name('warehouse.create');
     Route::post('warehouse/store', [WarehouseController::class, 'store'])->name('warehouse.store');
+//    delete
+    Route::delete('warehouse/{warehouse}', [WarehouseController::class, 'destroy'])->name('warehouse.destroy');
+//    edit
+    Route::get('warehouse/{warehouse}/edit', [WarehouseController::class, 'edit'])->name('warehouse.edit');
+    Route::patch('warehouse/{warehouse}', [WarehouseController::class, 'update'])->name('warehouse.update');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
