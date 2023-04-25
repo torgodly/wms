@@ -46,17 +46,17 @@
                                                 <td class="border px-4 py-2">{{ $product->description }}</td>
                                                 <td class="border px-4 py-2">{{ $product->price }}</td>
                                                 <td class="border px-4 py-2">
-                                                    <a  href="{{route('product.show',['warehouse' => $warehouse->id, 'product' => $product->id])}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View</a>
+                                                    <a  href="{{route('product.show',['warehouse' => $warehouse->id, 'product' => $product->code])}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View</a>
                                                 </td>
                                                 <td class="border px-4 py-2">
-                                                    <form  method="POST">
+                                                    <form  method="POST" action="{{route('product.destroy',['warehouse' => $warehouse->id, 'product' => $product->id])}}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</button>
                                                     </form>
                                                 </td>
                                                 <td class="border px-4 py-2">
-                                                    <a  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
+                                                    <a href="{{route('product.edit', ['warehouse' => $warehouse->id, 'product'=>$product->id])}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a>
                                                 </td>
                                             </tr>
                                         @endforeach
