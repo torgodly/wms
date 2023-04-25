@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WarehouseController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,11 @@ Route::middleware('auth')->group(function () {
 //    edit
     Route::get('warehouse/{warehouse}/edit', [WarehouseController::class, 'edit'])->name('warehouse.edit');
     Route::patch('warehouse/{warehouse}', [WarehouseController::class, 'update'])->name('warehouse.update');
+    //create product
+    Route::get('warehouse/{warehouse}/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('warehouse/{warehouse}/product/store', [ProductController::class, 'store'])->name('product.store');
+    //show
+    Route::get('warehouse/{warehouse}/product/{product}', [ProductController::class, 'show'])->name('product.show');
 });
 
 require __DIR__ . '/auth.php';
